@@ -1,0 +1,20 @@
+// backend/db.js  ← MUST BE EXACTLY THIS
+const { Pool } = require('pg');
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false   // ← THIS LINE FIXES THE 500 ERROR
+  }
+});
+
+// Optional: Log connection success
+pool.on('connect', () => {
+  console.log('Connected to Supabase PostgreSQL');
+});
+
+pool.on('error', (err) => {
+  console.error('Database connection error:', err);
+});
+
+module.exports = pool;

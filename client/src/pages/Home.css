@@ -1,0 +1,72 @@
+.Main-Blk {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.Main-Blk h1 {
+  text-align: center;
+  color: #25d366;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.error-text {
+  color: red;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.no-reviews {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #666;
+  margin-top: 3rem;
+}
+
+/* Shimmer Loading Effect */
+.card-shimmer {
+  background: #f6f7f8;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: pulse 1.5s infinite;
+}
+
+.shimmer-img {
+  height: 120px;
+  background: #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.shimmer-line {
+  height: 16px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  margin: 0.8rem 0;
+}
+
+.shimmer-line.short {
+  width: 70%;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
