@@ -17,9 +17,11 @@ const app = express();
 // Middleware
 app.use(express.urlencoded({ extended: true })); // For Twilio webhook
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin:["http://localhost:5174","https://twilio-review-product.vercel.app"]
+}));
 // {
-//     origin:["http://localhost:5174","https://twilio-review-product-pcpgfzra7-abhinavs-projects-dff478f0.vercel.app"]
+//     origin:["http://localhost:5174","https://twilio-review-product.vercel.app/"]
 // }
 // {
 //   origin: "http://localhost:5174" // Your React frontend
