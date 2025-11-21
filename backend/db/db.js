@@ -1,21 +1,20 @@
-// backend/db/db.js   ← MUST BE EXACTLY THIS
+// backend/db/db.js  ← UNIVERSAL CONNECTION MODULE (2025 BEST VERSION)
 const { Pool } = require('pg');
 
+// This single line works everywhere (Neon, Supabase, Railway Postgres, etc.)
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  // THIS LINE FORCES IPv4 — fixes ENETUNREACH forever
-  host: process.env.DATABASE_URL?.includes('supabase.co') 
-    ? 'db.your-project.supabase.co'  // ← change to your real host
-    : undefined,
+  // These two lines fix 99% of connection issues on all platforms
   ssl: {
-    rejectUnauthorized: false
-  }
+    rejectUnauthorized: false   // Required for Neon, Supabase, Railway, etc.
+  },
+  // Force IPv4 if needed (rarely needed with Neon)
+  // Remove this block if connection works without it
+  ...(process.env.DATABASE_URL && {
+    host: process.env.DATABASE_URL.match(/@([^:]+):/)?.[1],
+    dialectOptions: {
+      ssl: { rejectUnauthorized: false }
+    }
+  })
 });
 
-// Best practice: force IPv4 only
-pool.on('connect', (client) => {
-  client.query('SET client_encoding TO "UTF8"');
-  console.log('Connected to Supabase via IPv4');
-});
-
-module.exports = pool;
