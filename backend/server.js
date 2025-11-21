@@ -18,7 +18,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true })); // For Twilio webhook
 app.use(express.json());
 app.use(cors({
-  origin:["http://localhost:5174","https://twilio-review-product.vercel.app"]
+  origin:["http://localhost:5174/TwilioReviewProduct","https://twilio-review-product.vercel.app"]
 }));
 // {
 //     origin:["http://localhost:5174","https://twilio-review-product.vercel.app/"]
