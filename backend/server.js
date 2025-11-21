@@ -120,7 +120,7 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT ;
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORD}`);
+  console.log(`Server running on http://localhost:${PORT}`);
   console.log(`Webhook URL: https://your-ngrok-url.ngrok.io/replywhatsapp`);
-  console.log(`Send first message: http://localhost:${PORD}/start`);
+  console.log(`Send first message: http://localhost:${PORT}/start`);
 });
