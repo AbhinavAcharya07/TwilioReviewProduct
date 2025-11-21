@@ -23,27 +23,30 @@ const Home = () => {
         const response = await axios.get(`${BackEndUrl}/getallposts`);
 
         if (response.data.success) {
-          setPosts(response.data.data); // This contains your reviews
+          setPosts(response.data.data || []);
         } else {
           setError("Failed to load reviews");
         }
-      } catch {
-        if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
-          console.log(error.request);
+      } catch (err) {
+        // ← This is the fix: catch(err)
+        console.error("Fetch error:", err);
+
+        // Now safely check the error type
+        if (err.response) {
+          // Server responded with error status (4xx, 5xx)
+          console.log("Response error:", err.response.data);
+          setError(`Server error: ${err.response.status}`);
+        } else if (err.request) {
+          // Request made but no response (CORS, network down, backend not running)
+          console.log("No response received:", err.request);
+          setError(
+            "No response from server. Check if backend is running or CORS is allowed."
+          );
         } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log("Error", error.message);
+          // Other errors (e.g. wrong URL format)
+          console.log("Request setup error:", err.message);
+          setError("Failed to fetch reviews");
         }
-        console.log(error.config);
       } finally {
         setLoading(false);
       }
