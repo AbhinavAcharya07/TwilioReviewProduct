@@ -99,8 +99,8 @@ app.post("/replywhatsapp", async (req, res) => {
 
 Your review is saved:
 • Product: ${userData[from].product}
-• Rating: ${userData[from].rating} stars
-• Review: "${answer}"
+• Name: ${userData[from].name} 
+• Review: "${userData[from].review}"
 
 We truly appreciate your feedback!`;
 
