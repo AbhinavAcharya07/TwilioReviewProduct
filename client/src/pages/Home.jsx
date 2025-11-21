@@ -1,5 +1,6 @@
 import Card from "./Card";
 import "./Home.css";
+import scanner from "../assets/scanner.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -56,7 +57,22 @@ const Home = () => {
 
   return (
     <div className="Main-Blk">
-      <h1>Customer Reviews from WhatsApp</h1>
+      <h1 className="headline-with-qr">
+        Customer Reviews from WhatsApp
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          className="qr-link"
+          title="Scan to leave a review"
+        >
+          <img
+            src={scanner}
+            alt="Scan to review on WhatsApp"
+            className="qr-small"
+          />
+          <span className="scan-text">Scan to Review</span>
+        </a>
+      </h1>
 
       {/* Error Message */}
       {error && <p className="error-text">{error}</p>}
